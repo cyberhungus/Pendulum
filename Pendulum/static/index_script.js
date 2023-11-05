@@ -1,8 +1,11 @@
+//always stores the last received data
 let Globaldata = ""
-
+//starts the "thread" to retrieve data ad sets the URL
 window.onload = init;
+//stores own URL
 let serverAddress;
 
+//get display elements to manupilate
 const div_MeasurementA = document.getElementById("MeasurementA");
 const div_MeasurementB = document.getElementById("MeasurementB");
 const div_lastTime = document.getElementById("time");
@@ -10,19 +13,20 @@ const canvas = document.getElementById("pendulumCanvas");
 const canvas_context = canvas.getContext("2d");
 
 
+//gets data, updates screen - called every 200ms
 function loadData() {
     getJson(serverAddress + "api/data");
     updateScreen();
     
 }
-
+//get address, create mainloop
 function init() {
     console.log("start")
     serverAddress = getAddress();
     window.setInterval(loadData, 200);
 }
 
-
+//stores the current url for use by the data-getting function
 function getAddress() {
     tmpAddress = window.location.href;
     if (tmpAddress.search("#") === (tmpAddress.length - 1)) {
@@ -33,6 +37,7 @@ function getAddress() {
     }
 }
 
+//writes new data to screen
 function updateScreen() {
     div_MeasurementA.innerHTML = "A: " + Globaldata.status.currentA + "- DEG: " + calcDegree(Globaldata.status.currentA);
     div_MeasurementB.innerHTML = "B: " + Globaldata.status.currentB;
@@ -55,7 +60,7 @@ function updateScreen() {
 
    
 }
-
+//calls and retrieves json object
 async function getJson(url) {
     fetch(url)
         .then(response => {
@@ -73,9 +78,11 @@ async function getJson(url) {
 
 }
 
+//does the degree calculation from retrieved voltage
 function calcDegree(voltage, divider = 2, angle = 90) {
-    return (voltage/divider)*100
+    return (voltage/divider)*angle
 }
+
 
 function calcPercent(current, fulllength) {
     let wert=0;

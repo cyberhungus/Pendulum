@@ -3,6 +3,9 @@ from threading import Thread
 from unittest import runner
 from time import sleep, thread_time
 
+#class to simulate the ADC on a normal windows computer
+#works like realADC
+
 class FakeADC(object):
     def __init__(self):
         print("FakeADC")
