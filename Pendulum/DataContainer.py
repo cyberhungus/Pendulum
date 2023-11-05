@@ -1,3 +1,5 @@
+#singleton for data management - this class holds all variables 
+#acts like a translator between Flask and Python
 class DataContainer(object):
    
     MeasurementA = 0
@@ -8,6 +10,8 @@ class DataContainer(object):
 
     __instance = None
 
+
+    #Singleton, always call getInstance
     @staticmethod
     def getInstance():
         """ Static access method. """
@@ -24,7 +28,7 @@ class DataContainer(object):
             print("DataContainer init")
 
 
-
+    #called to set new data
     def setMeasurements(cls, A, B, time):
         cls.MeasurementA = A
         cls.MeasurementB = B 

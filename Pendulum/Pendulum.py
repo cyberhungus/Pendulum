@@ -1,4 +1,4 @@
-import imp
+#check platform, load realADC when started on Linux, bur fakeADC when started on WIndows
 import platform
 if platform.system() == "Windows":
     from FakeADC import FakeADC
@@ -17,8 +17,10 @@ from threading import Thread
 import FlaskWebInterface
 
 print()
+#create singleton DataContainer
 DC = DataContainer().getInstance()
 
+#takes data from ADC and puts them into DataContainer
 def getDataRunner():
     while 1:
         print(thread_time(), ADModule.getCurrentValues()[1][0]);
@@ -27,9 +29,11 @@ def getDataRunner():
 
 
 
-
+#thread to get data from ADC to Datacontainer
 dataTransfer = Thread (target = getDataRunner)
 dataTransfer.start()
+
+#web thread
 webThread = Thread(target = FlaskWebInterface.startWebInterface, args=(True, ))
 webThread.start()
 

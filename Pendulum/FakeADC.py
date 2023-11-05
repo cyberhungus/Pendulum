@@ -15,7 +15,7 @@ class FakeADC(object):
         r = Random()
         while 1:
             for i in range(0,4):
-                self.list[i] = r.randint(0,5000)
+                self.list[i] = r.randint(0,400)/100
             sleep(0.1)
 
     def getCurrentValues(self):

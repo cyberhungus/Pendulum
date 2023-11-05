@@ -42,7 +42,7 @@ class TestView(FlaskView):
 
 TestView.register(app, route_base='/')
 
-
+#start webinterface open or closed to network
 def startWebInterface(openToNetwork=False):
     if openToNetwork == True:
         app.run(host='0.0.0.0', port=9000, debug=False)
