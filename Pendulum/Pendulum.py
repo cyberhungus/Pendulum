@@ -10,7 +10,7 @@ else:
     print("selected linux")
 
 
-
+#init and import
 from DataContainer import DataContainer
 from time import thread_time
 from threading import Thread
